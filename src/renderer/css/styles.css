@@ -78,18 +78,21 @@ header {
   z-index: -1;
 }
 
-#modal {
+.modal {
   position: absolute;
+  top: -1000px;
+  opacity: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
   padding: 0 2rem;
-  display: none;
+  visibility: hidden;
+  transition: all 0.15s ease-in;
 }
 
 #url {
@@ -99,12 +102,18 @@ header {
   padding: 1rem;
 }
 
-#modal button {
+.modal button {
   padding: 1rem;
 }
 
-#close-modal {
+.btn-close-modal {
   background-color: white;
   color: black;
   margin-left: 1.5rem;
+}
+
+.show-modal {
+  visibility: visible;
+  top: 0;
+  opacity: 1;
 }
