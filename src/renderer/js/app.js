@@ -1,23 +1,11 @@
-let showModalEl = document.getElementById("show-modal");
-let closeModalBtnEl = document.getElementById("close-modal");
-let modalEl = document.querySelector(".modal");
+/// handle modal toggling
+import { toggleModal } from "./modal-handler.js";
 
-const toggleBtn = (modalEl) => {
-  if (modalEl.classList.contains("show-modal")) {
-    modalEl.classList.remove("show-modal");
-  } else {
-    modalEl.classList.add("show-modal");
-  }
-};
+let showModalEl = document.getElementById("show-modal"),
+  closeModalBtnEl = document.getElementById("close-modal"),
+  modalEl = document.querySelector(".modal");
 
-if (showModalEl && modalEl) {
-  showModalEl.addEventListener("click", (e) => {
-    toggleBtn(modalEl);
-  });
-}
-
-if (showModalEl && modalEl) {
-  closeModalBtnEl.addEventListener("click", (e) => {
-    toggleBtn(modalEl);
-  });
+/// handle showing of modal
+if ((showModalEl, closeModalBtnEl, modalEl)) {
+  toggleModal(modalEl, showModalEl, closeModalBtnEl);
 }
