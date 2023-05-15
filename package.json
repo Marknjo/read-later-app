@@ -1,0 +1,16 @@
+{
+  "name": "readit-app",
+  "version": "1.0.0",
+  "description": "App that captures articles to read later",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "nodemon --exec electron . -e js,html,css"
+  },
+  "keywords": [],
+  "author": "Mark Njoroge",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^24.3.0",
+    "nodemon": "^2.0.22"
+  }
+}
