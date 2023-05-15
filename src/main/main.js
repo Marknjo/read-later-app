@@ -1,19 +1,29 @@
-const { join } = require("path");
+// const { join } = require("path");
 const { BrowserWindow, app } = require("electron");
+const windowStateKeeper = require("electron-window-state");
 
 let win;
 
 const createWindow = () => {
+  let winState = windowStateKeeper({
+    defaultWidth: 500,
+    defaultHeight: 650,
+  });
+
   win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    x: winState.x,
+    y: winState.y,
+    width: winState.width,
+    height: winState.height,
     webPreferences: {
       nodeIntegration: false,
     },
   });
 
   /// Get html
-  win.loadFile(join(__dirname, "../", "renderer", "index.html"));
+  win.loadFile("../renderer/index.html");
+
+  winState.manage(win);
 
   /// on window close clear window reference
   win.on("close", () => {
