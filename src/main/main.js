@@ -1,4 +1,4 @@
-// const { join } = require("path");
+const { join } = require("path");
 const { BrowserWindow, app } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 
@@ -21,9 +21,11 @@ const createWindow = () => {
   });
 
   /// Get html
-  win.loadFile("../renderer/index.html");
+  win.loadFile(join(__dirname, "../", "renderer", "index.html"));
 
   winState.manage(win);
+
+  win.webContents.openDevTools();
 
   /// on window close clear window reference
   win.on("close", () => {
