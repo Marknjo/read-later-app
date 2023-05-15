@@ -1,3 +1,7 @@
+/**
+ *
+ * @param {HTMLDivElement} modalEl
+ */
 export const modalToggler = (modalEl) => {
   modalEl?.firstElementChild.focus();
   if (modalEl.classList.contains("show-modal")) {
@@ -20,5 +24,11 @@ export function toggleModal(modalEl, showModalEl, closeModalBtnEl) {
 
   closeModalBtnEl.addEventListener("click", (e) => {
     modalToggler(modalEl);
+  });
+
+  document.body.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+      modalToggler(modalEl);
+    }
   });
 }
