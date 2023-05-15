@@ -17,6 +17,7 @@ const createWindow = () => {
     height: winState.height,
     webPreferences: {
       nodeIntegration: false,
+      devTools: false,
     },
   });
 
