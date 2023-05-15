@@ -18,9 +18,5 @@ if ((showModalEl, closeModalBtnEl, modalEl)) {
 
 /// Handle add item to the UI
 if (itemUrlEl && addItemEl && modalEl) {
-  console.log("Load");
-
-  console.log(itemUrlEl.focus());
-
   createItem(itemUrlEl, addItemEl, modalEl);
 }

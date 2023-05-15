@@ -15,6 +15,9 @@ const createWindow = () => {
     y: winState.y,
     width: winState.width,
     height: winState.height,
+    minHeight: 300,
+    minWidth: 350,
+    // maxWidth: 650,
     webPreferences: {
       nodeIntegration: false,
       devTools: true,
