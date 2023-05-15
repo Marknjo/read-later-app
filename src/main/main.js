@@ -14,6 +14,11 @@ const createWindow = () => {
 
   /// Get html
   win.loadFile(join(__dirname, "../", "renderer", "index.html"));
+
+  /// on window close clear window reference
+  win.on("close", () => {
+    win = null;
+  });
 };
 
 app.whenReady().then(() => {
