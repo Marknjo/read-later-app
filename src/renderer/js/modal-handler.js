@@ -1,4 +1,5 @@
 export const modalToggler = (modalEl) => {
+  modalEl?.firstElementChild.focus();
   if (modalEl.classList.contains("show-modal")) {
     modalEl.classList.remove("show-modal");
   } else {
