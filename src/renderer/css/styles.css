@@ -84,19 +84,22 @@ header {
   opacity: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
-  padding: 0 2rem;
+  gap: 2rem;
+
+  background-color: rgba(0, 0, 0, 0.75);
   visibility: hidden;
+  padding: 0 2rem;
   transition: all 0.15s ease-in;
 }
 
 #url {
-  flex: 1;
+  flex-grow: 1;
   width: 100%;
   margin: 0 2.5rem;
   padding: 1rem;
@@ -104,6 +107,7 @@ header {
 
 .modal button {
   padding: 1rem;
+  align-self: flex-start;
 }
 
 .btn-close-modal {
