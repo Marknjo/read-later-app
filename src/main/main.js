@@ -1,8 +1,22 @@
 const { join } = require("path");
-const { BrowserWindow, app } = require("electron");
+const { BrowserWindow, app, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 
 let win;
+
+/**
+ *
+ * @param {Electron.IpcMainInvokeEvent} event
+ * @param {any} args
+ * @returns
+ */
+function setItemHandler(event, args) {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(args);
+    }, 2000)
+  );
+}
 
 const createWindow = () => {
   let winState = windowStateKeeper({
@@ -21,6 +35,7 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: false,
       devTools: true,
+      preload: join(__dirname, "preload.js"),
     },
   });
 
@@ -38,6 +53,8 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
+  ipcMain.handle("item:set-url", setItemHandler);
+
   createWindow();
 
   app.on("activate", () => {

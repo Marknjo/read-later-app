@@ -2,17 +2,46 @@ import { modalToggler } from "./modal-handler.js";
 
 /**
  *
+ * @param {HTMLButtonElement} addItemBtnEl
+ */
+export const toggleAddItemBtnStatus = (addItemBtnEl) => {
+  if (!addItemBtnEl) return;
+  if (addItemBtnEl.disabled === true) {
+    addItemBtnEl.disabled = false;
+    addItemBtnEl.style.opacity = 1;
+    addItemBtnEl.innerText = "Add Item";
+  } else {
+    addItemBtnEl.disabled = true;
+    addItemBtnEl.style.opacity = 0.5;
+    addItemBtnEl.innerText = "Adding...";
+  }
+};
+
+/**
+ *
  * @param {HTMLInputElement} itemEl
  * @param {HTMLDivElement} modalEl
  * @returns void
  */
-const addItem = (itemEl, modalEl) => {
+const addItem = async (itemEl, modalEl, addItemBtnEl) => {
+  /// start loader
+  toggleAddItemBtnStatus(addItemBtnEl);
+
   const url = itemEl.value;
 
   /// handle errors gracefully
   if (!url) return;
 
-  console.log(url);
+  const response = await window.electronAPI.setItemUrl(url);
+
+  if (response) {
+    console.log(response);
+
+    // reset loader
+    toggleAddItemBtnStatus(addItemBtnEl);
+
+    // @TODO: show success message
+  }
 
   /// clean input and close the modal
   itemEl.value = "";
@@ -28,12 +57,12 @@ const addItem = (itemEl, modalEl) => {
  */
 export const createItem = (itemEl, addItemEl, modalEl) => {
   addItemEl.addEventListener("click", () => {
-    addItem(itemEl, modalEl);
+    addItem(itemEl, modalEl, addItemEl);
   });
 
   itemEl.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      addItem(itemEl, modalEl);
+      addItem(itemEl, modalEl, addItemEl);
     }
   });
 };

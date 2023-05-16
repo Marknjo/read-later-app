@@ -1,6 +1,7 @@
 /**
  *
  * @param {HTMLDivElement} modalEl
+ *
  */
 export const modalToggler = (modalEl) => {
   modalEl?.firstElementChild.focus();
