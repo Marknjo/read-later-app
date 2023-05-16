@@ -24,29 +24,35 @@ export const toggleAddItemBtnStatus = (addItemBtnEl) => {
  * @returns void
  */
 const addItem = async (itemEl, modalEl, addItemBtnEl) => {
-  /// start loader
-  toggleAddItemBtnStatus(addItemBtnEl);
-
-  const url = itemEl.value;
-
-  /// handle errors gracefully
-  if (!url) return;
-
-  const response = await window.electronAPI.setItemUrl(url);
-
-  if (response) {
-    console.log(response);
-
-    // reset loader
+  try {
+    /// start loader
     toggleAddItemBtnStatus(addItemBtnEl);
 
-    // @TODO: show success message
-  }
+    const url = itemEl.value;
 
-  /// clean input and close the modal
-  itemEl.value = "";
-  itemEl.focus();
-  modalToggler(modalEl);
+    /// handle errors gracefully
+    if (!url) return;
+
+    const response = await window.electronAPI.setItemUrl(url);
+
+    if (response) {
+      console.log(response);
+
+      // reset loader
+      toggleAddItemBtnStatus(addItemBtnEl);
+
+      // @TODO: show success message
+    }
+
+    /// clean input and close the modal
+    itemEl.value = "";
+    itemEl.focus();
+    modalToggler(modalEl);
+  } catch (error) {
+    // @TODO: show error message
+    // console.log(error);
+    toggleAddItemBtnStatus(addItemBtnEl);
+  }
 };
 
 /**

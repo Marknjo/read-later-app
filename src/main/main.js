@@ -1,6 +1,9 @@
 const { join } = require("path");
 const { BrowserWindow, app, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
+const readPageMeta = require("./get-page-meta");
+
+/// RESUME on PAGE: 1305
 
 let win;
 
@@ -10,12 +13,16 @@ let win;
  * @param {any} args
  * @returns
  */
-function setItemHandler(event, args) {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(args);
-    }, 2000)
-  );
+function setItemHandler(_event, url) {
+  return new Promise((resolve, reject) => {
+    readPageMeta(url, (response) => {
+      if (response.status === "success") {
+        resolve(response.data);
+      } else {
+        reject(response.error);
+      }
+    });
+  });
 }
 
 const createWindow = () => {
