@@ -15,6 +15,7 @@ body {
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 body {
@@ -54,6 +55,26 @@ header {
   border-bottom: 1px solid silver;
 }
 
+main {
+  flex: 1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+main::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+main::-webkit-scrollbar-track {
+  border-radius: 0.2rem;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+
+main::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background-color: dodgerblue;
+}
+
 #show-modal {
   padding: 0 1.2rem 0.5rem;
   margin-right: 1rem;
@@ -61,10 +82,6 @@ header {
 }
 
 #search {
-  flex-grow: 1;
-}
-
-#items {
   flex-grow: 1;
 }
 
@@ -77,6 +94,12 @@ header {
   top: 100px;
   z-index: -1;
 }
+
+/**
+* --------------------------------
+*              Modal
+*  --------------------------------
+*/
 
 .modal {
   position: absolute;
@@ -107,7 +130,6 @@ header {
 
 .modal button {
   padding: 1rem;
-  align-self: flex-start;
 }
 
 .btn-close-modal {
@@ -115,9 +137,40 @@ header {
   color: black;
   margin-left: 1.5rem;
 }
+#add-item {
+  margin-left: 2.5rem;
+}
 
 .show-modal {
   visibility: visible;
   top: 0;
   opacity: 1;
+}
+
+/**
+* --------------------------------
+*             Read Item
+*  --------------------------------
+*/
+#items {
+  flex-grow: 1;
+  border-bottom: 2px solid lightgray;
+}
+
+.read-item {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background-color: #fafafa;
+  padding: 1rem;
+}
+
+.read-item:not(:last-of-type) {
+  border-bottom: 2px solid lightgray;
+}
+
+.read-item img {
+  width: 20%;
+  margin-right: 2.5rem;
+  aspect-ratio: 1;
 }
