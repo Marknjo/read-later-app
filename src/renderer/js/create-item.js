@@ -31,7 +31,11 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     const url = itemEl.value;
 
     /// handle errors gracefully
-    if (!url) return;
+    if (!url || url === "") {
+      // @TODO: show popup, with error message
+      toggleAddItemBtnStatus(addItemBtnEl);
+      return;
+    }
 
     const response = await window.electronAPI.setItemUrl(url);
 
@@ -50,7 +54,8 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     modalToggler(modalEl);
   } catch (error) {
     // @TODO: show error message
-    // console.log(error);
+    console.error(error.message);
+
     toggleAddItemBtnStatus(addItemBtnEl);
   }
 };

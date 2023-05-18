@@ -38,7 +38,10 @@ module.exports = async (url, callback) => {
     });
   } catch (error) {
     /// Resolve with error
-    callback({ error, status: "error" });
+    callback({
+      error,
+      status: "error",
+    });
     offscreenWindow.close();
     offscreenWindow = null;
   }
