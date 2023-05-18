@@ -13,8 +13,8 @@ app.disableHardwareAcceleration();
 module.exports = async (url, callback) => {
   try {
     offscreenWindow = new BrowserWindow({
-      width: 1000,
-      height: 1000,
+      width: 1500,
+      height: 1500,
       show: false,
       webPreferences: {
         offscreen: true,

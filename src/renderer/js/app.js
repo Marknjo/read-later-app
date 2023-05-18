@@ -1,5 +1,5 @@
 /// handle modal toggling
-import { createItem } from "./create-item.js";
+import { createItem, loadItemsHandler } from "./create-item.js";
 import { toggleModal } from "./modal-handler.js";
 
 // modal elements
@@ -19,4 +19,5 @@ if (itemUrlEl && showModalEl && closeModalBtnEl && modalEl) {
 /// Handle add item to the UI
 if (itemUrlEl && addItemEl && modalEl) {
   createItem(itemUrlEl, addItemEl, modalEl);
+  loadItemsHandler();
 }

@@ -1,9 +1,15 @@
-import displayItem from "./display-item.js";
+import displayItem, { loadLocalItems } from "./display-item.js";
+import { loadFromStore, saveToStore } from "./local-store.js";
 import { modalToggler } from "./modal-handler.js";
 
 // Items UI
 let itemsEl = document.getElementById("items");
 let itemTemplateEl = document.querySelector("#templates");
+
+// Load from local storage
+export const loadItemsHandler = () => {
+  loadLocalItems(loadFromStore, itemsEl, itemTemplateEl);
+};
 
 /**
  *
@@ -70,7 +76,8 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     if (response) {
       // display fetched items to the page
       if (itemsEl && itemTemplateEl) {
-        displayItem(response, itemsEl, itemTemplateEl);
+        displayItem(response, itemsEl, itemTemplateEl, true);
+        saveToStore(response);
       }
 
       // reset loader
