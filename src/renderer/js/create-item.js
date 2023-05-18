@@ -1,14 +1,23 @@
+// import * as debounce from "lodash.debounce";
 import displayItem, { loadLocalItems } from "./display-item.js";
 import { loadFromStore, saveToStore } from "./local-store.js";
 import { modalToggler } from "./modal-handler.js";
+import { searchReaders } from "./search-readers.js";
 
 // Items UI
-let itemsEl = document.getElementById("items");
-let itemTemplateEl = document.querySelector("#templates");
+let itemsEl = document.getElementById("items"),
+  itemTemplateEl = document.querySelector("#templates"),
+  searchInputEl = document.getElementById("search");
 
 // Load from local storage
 export const loadItemsHandler = () => {
+  // search items by title
   loadLocalItems(loadFromStore, itemsEl, itemTemplateEl);
+
+  console.log();
+
+  // loadLocalItems(filteredItems, itemsEl, itemTemplateEl);
+  searchReaders(itemsEl, searchInputEl);
 };
 
 /**

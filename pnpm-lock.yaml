@@ -4,6 +4,9 @@ dependencies:
   electron-window-state:
     specifier: ^5.0.3
     version: 5.0.3
+  lodash.debounce:
+    specifier: ^4.0.8
+    version: 4.0.8
 
 devDependencies:
   electron:
@@ -467,6 +470,10 @@ packages:
     dependencies:
       json-buffer: 3.0.1
     dev: true
+
+  /lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: false
 
   /lowercase-keys@2.0.0:
     resolution: {integrity: sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==}

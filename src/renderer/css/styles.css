@@ -174,3 +174,22 @@ main::-webkit-scrollbar-thumb {
   margin-right: 2.5rem;
   aspect-ratio: 1;
 }
+
+.show {
+  display: flex;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
