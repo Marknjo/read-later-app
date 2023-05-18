@@ -16,8 +16,8 @@ let itemsEl = document.getElementById("items");
 let itemTemplateEl = document.querySelector("#templates");
 
 /// handle showing of modal
-if ((showModalEl, closeModalBtnEl, modalEl)) {
-  toggleModal(modalEl, showModalEl, closeModalBtnEl);
+if (itemUrlEl && showModalEl && closeModalBtnEl && modalEl) {
+  toggleModal(modalEl, showModalEl, closeModalBtnEl, itemUrlEl);
 }
 
 /// Handle add item to the UI

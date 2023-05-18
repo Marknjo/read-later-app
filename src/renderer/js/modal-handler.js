@@ -4,7 +4,6 @@
  *
  */
 export const modalToggler = (modalEl) => {
-  modalEl?.firstElementChild.focus();
   if (modalEl.classList.contains("show-modal")) {
     modalEl.classList.remove("show-modal");
   } else {
@@ -17,8 +16,10 @@ export const modalToggler = (modalEl) => {
  * @param {HTMLDivElement} modalEl
  * @param {HTMLButtonElement} showModalEl
  * @param {HTMLButtonElement} closeModalBtnEl
+ * @param {HTMLInputElement} itemUrl
  */
-export function toggleModal(modalEl, showModalEl, closeModalBtnEl) {
+export function toggleModal(modalEl, showModalEl, closeModalBtnEl, itemUrl) {
+  itemUrl.focus();
   showModalEl.addEventListener("click", () => {
     modalToggler(modalEl);
   });
