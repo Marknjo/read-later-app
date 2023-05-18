@@ -11,7 +11,7 @@ const parsedItems = (getEntries = false, getTitles = false) => {
 
   if (getTitles) return [...new Map(itemEntries).keys()];
 
-  return [...new Map(itemEntries).values()];
+  return [...new Map(itemEntries).values()].reverse();
 };
 
 export const loadFromStore = parsedItems();
