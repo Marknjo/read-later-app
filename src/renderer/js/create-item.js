@@ -33,6 +33,7 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     /// handle errors gracefully
     if (!url || url === "") {
       // @TODO: show popup, with error message
+      itemEl.focus();
       toggleAddItemBtnStatus(addItemBtnEl);
       return;
     }
@@ -61,12 +62,11 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
 
     /// clean input and close the modal
     itemEl.value = "";
-    itemEl.focus();
     modalToggler(modalEl);
   } catch (error) {
     // @TODO: show error message
     console.error(error.message);
-
+    itemEl.select();
     toggleAddItemBtnStatus(addItemBtnEl);
   }
 };
