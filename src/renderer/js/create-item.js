@@ -1,4 +1,9 @@
+import displayItem from "./display-item.js";
 import { modalToggler } from "./modal-handler.js";
+
+// Items UI
+let itemsEl = document.getElementById("items");
+let itemTemplateEl = document.querySelector("#templates");
 
 /**
  *
@@ -16,6 +21,17 @@ export const toggleAddItemBtnStatus = (addItemBtnEl) => {
     addItemBtnEl.innerText = "Adding...";
   }
 };
+
+function isValidUrl(urlStr) {
+  let url;
+  try {
+    url = new URL(urlStr);
+  } catch (e) {
+    return false;
+  }
+
+  return !!url;
+}
 
 /**
  *
@@ -45,14 +61,17 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     }
 
     // ensure url is a valid url
-    if (!!new URL(url)) {
+    if (!isValidUrl(url)) {
       throw new Error("Invalid url structure");
     }
 
     const response = await window.electronAPI.setItemUrl(url);
 
     if (response) {
-      console.log(response);
+      // display fetched items to the page
+      if (itemsEl && itemTemplateEl) {
+        displayItem(response, itemsEl, itemTemplateEl);
+      }
 
       // reset loader
       toggleAddItemBtnStatus(addItemBtnEl);
