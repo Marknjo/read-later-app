@@ -41,7 +41,11 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     const hasProtocol = url.includes("http://") || url.includes("https://");
     if (!hasProtocol) {
       url = `https://${url}`;
-      console.log({ url });
+    }
+
+    // ensure url is a valid url
+    if (!!new URL(url)) {
+      throw new Error("Invalid url structure");
     }
 
     const response = await window.electronAPI.setItemUrl(url);
