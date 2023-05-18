@@ -28,13 +28,20 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
     /// start loader
     toggleAddItemBtnStatus(addItemBtnEl);
 
-    const url = itemEl.value;
+    let url = itemEl.value;
 
     /// handle errors gracefully
     if (!url || url === "") {
       // @TODO: show popup, with error message
       toggleAddItemBtnStatus(addItemBtnEl);
       return;
+    }
+
+    // ensure url has a protocol before proceeding
+    const hasProtocol = url.includes("http://") || url.includes("https://");
+    if (!hasProtocol) {
+      url = `https://${url}`;
+      console.log({ url });
     }
 
     const response = await window.electronAPI.setItemUrl(url);
