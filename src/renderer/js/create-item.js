@@ -78,7 +78,8 @@ const addItem = async (itemEl, modalEl, addItemBtnEl) => {
  * @param {HTMLDivElement} modalEl
  */
 export const createItem = (itemEl, addItemEl, modalEl) => {
-  addItemEl.addEventListener("click", () => {
+  addItemEl.addEventListener("click", (event) => {
+    event.stopPropagation();
     addItem(itemEl, modalEl, addItemEl);
   });
 
@@ -87,4 +88,5 @@ export const createItem = (itemEl, addItemEl, modalEl) => {
       addItem(itemEl, modalEl, addItemEl);
     }
   });
+  itemEl.addEventListener("click", (event) => event.stopPropagation());
 };

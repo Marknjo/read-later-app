@@ -19,11 +19,12 @@ export const modalToggler = (modalEl) => {
  * @param {HTMLButtonElement} closeModalBtnEl
  */
 export function toggleModal(modalEl, showModalEl, closeModalBtnEl) {
-  showModalEl.addEventListener("click", (e) => {
+  showModalEl.addEventListener("click", () => {
     modalToggler(modalEl);
   });
 
-  closeModalBtnEl.addEventListener("click", (e) => {
+  closeModalBtnEl.addEventListener("click", (event) => {
+    event.stopPropagation();
     modalToggler(modalEl);
   });
 
@@ -31,5 +32,8 @@ export function toggleModal(modalEl, showModalEl, closeModalBtnEl) {
     if (event.key === "Escape") {
       modalToggler(modalEl);
     }
+  });
+  modalEl.addEventListener("click", (event) => {
+    modalToggler(modalEl);
   });
 }
