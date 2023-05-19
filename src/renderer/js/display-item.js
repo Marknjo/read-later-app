@@ -53,14 +53,18 @@ export function loadLocalItems(localItems, itemsWrapperEl, itemTemplate) {
 }
 
 /**
+ * Helper to toggle selected reader item
+ * @param {HTMLElement} itemEl
+ */
+const toggleSelectedItem = (itemEl) => {
+  itemEl.classList.toggle("selected");
+};
+
+/**
  * Attach  a listener to toggle selected item
  * @param {HTMLElement} itemEl
  */
 export function selectItem(itemEl) {
-  const toggleSelectedItem = (el) => {
-    el.classList.toggle("selected");
-  };
-
   itemEl.addEventListener("click", (event) => {
     const selectedItem = itemEl.parentElement.querySelector(".selected");
 
@@ -76,8 +80,51 @@ export function selectItem(itemEl) {
       toggleSelectedItem(event.target);
     }
   });
+}
 
-  // itemEl.addEventListener("mouseleave", () => {
-  //   itemEl.classList.remove("selected");
-  // });
+export function selectedReaderItemByArrowsHandler() {
+  let selectedEl;
+
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      selectedEl = document.querySelector("#items > .read-item.selected");
+    }
+
+    if (event.key === "ArrowDown") {
+      return changeSelectedByArrow("ArrowDown", selectedEl);
+    }
+
+    if (event.key === "ArrowUp") {
+      return changeSelectedByArrow("ArrowUp", selectedEl);
+    }
+  });
+}
+
+/**
+ *
+ * @param {'ArrowDown' | 'ArrowUp'} direction
+ * @param {HTMLElement} itemEl
+ */
+function changeSelectedByArrow(direction, itemEl) {
+  const selectedItem = itemEl.parentElement.querySelector(".selected");
+
+  if (direction === "ArrowDown") {
+    const nextSib = selectedItem.nextElementSibling;
+    if (nextSib) {
+      toggleSelectedItem(itemEl);
+      toggleSelectedItem(nextSib);
+      return;
+    }
+    return;
+  }
+
+  if (direction === "ArrowUp") {
+    const prevSib = selectedItem.previousElementSibling;
+    if (prevSib) {
+      toggleSelectedItem(itemEl);
+      toggleSelectedItem(prevSib);
+      return;
+    }
+    return;
+  }
 }

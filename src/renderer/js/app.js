@@ -1,5 +1,6 @@
 /// handle modal toggling
 import { createItem, loadItemsHandler } from "./create-item.js";
+import { selectedReaderItemByArrowsHandler } from "./display-item.js";
 import { toggleModal } from "./modal-handler.js";
 
 // modal elements
@@ -21,3 +22,6 @@ if (itemUrlEl && addItemEl && modalEl) {
   createItem(itemUrlEl, addItemEl, modalEl);
   loadItemsHandler();
 }
+
+// handle update of ui of the selected element by moving arrows
+selectedReaderItemByArrowsHandler();
