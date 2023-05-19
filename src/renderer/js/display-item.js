@@ -1,4 +1,5 @@
 import { loadFromStore, loadTitlesFromStore } from "./local-store.js";
+import { readit } from "./read-item.js";
 
 /**
  *
@@ -27,7 +28,7 @@ export default function displayItem(
 
   imgEl.src = response.screenshot;
   h2El.innerText = response.title;
-  displayElement.href = response.url;
+  displayElement.dataset.readitUrl = response.url;
 
   selectItem(displayElement);
 
@@ -80,6 +81,9 @@ export function selectItem(itemEl) {
       toggleSelectedItem(event.target);
     }
   });
+
+  /// open the readit Item if double clicked
+  itemEl.addEventListener("dblclick", readit);
 }
 
 export function selectFirstReaderItemOnPageLoad() {

@@ -5,6 +5,7 @@ import {
   selectedReaderItemByArrowsHandler,
 } from "./display-item.js";
 import { toggleModal } from "./modal-handler.js";
+import { readitOnEnter } from "./read-item.js";
 
 // modal elements
 let showModalEl = document.getElementById("show-modal"),
@@ -29,3 +30,4 @@ if (itemUrlEl && addItemEl && modalEl) {
 // handle update of ui of the selected element by moving arrows
 selectFirstReaderItemOnPageLoad();
 selectedReaderItemByArrowsHandler();
+readitOnEnter();
