@@ -7,7 +7,22 @@ export function readit() {
 
   const contentUrl = selectedItem.dataset.readitUrl;
 
-  console.log("Opening Item ", contentUrl);
+  const readerWin = window.open(
+    contentUrl,
+    "",
+    `
+    maxWidth=2000,
+    maxHeight=2000,
+    width=1200,
+    height=800,
+    backgroundColor=#DEDEDE,
+    nodeIntegration=0,
+    contextIsolation=1
+  `
+  );
+
+  /* @TODO: Implement a better mode of handling js */
+  readerWin.eval(`alert('Hello from items.js')`);
 }
 
 /**
