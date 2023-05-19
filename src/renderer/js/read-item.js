@@ -21,8 +21,9 @@ export function readit() {
   `
   );
 
+  getReaderJS(readerWin);
+
   /* @TODO: Implement a better mode of handling js */
-  readerWin.eval(`alert('Hello from items.js')`);
 }
 
 /**
@@ -34,4 +35,12 @@ export function readitOnEnter() {
       readit();
     }
   });
+}
+
+async function getReaderJS(readerWin) {
+  const readItJs = await window.electronAPI.loadReaderJs();
+
+  console.log(readerWin);
+
+  readerWin.eval(readItJs);
 }

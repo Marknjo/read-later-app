@@ -1,4 +1,5 @@
 const { join } = require("path");
+const { readFile } = require("fs/promises");
 const { BrowserWindow, app, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 const readPageMeta = require("./get-page-meta");
@@ -23,6 +24,10 @@ function setItemHandler(_event, url) {
       }
     });
   });
+}
+
+function setReadItJSHandler() {
+  return readFile(join(__dirname, "readit-js.js"), "utf-8");
 }
 
 const createWindow = () => {
@@ -61,6 +66,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   ipcMain.handle("item:set-url", setItemHandler);
+  ipcMain.handle("readit:js", setReadItJSHandler);
 
   createWindow();
 
