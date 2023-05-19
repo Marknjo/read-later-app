@@ -82,6 +82,12 @@ export function selectItem(itemEl) {
   });
 }
 
+export function selectFirstReaderItemOnPageLoad() {
+  document.addEventListener("DOMContentLoaded", () => {
+    highlightReaderItem();
+  });
+}
+
 export function selectedReaderItemByArrowsHandler() {
   let selectedEl;
 
@@ -126,5 +132,15 @@ function changeSelectedByArrow(direction, itemEl) {
       return;
     }
     return;
+  }
+}
+
+function highlightReaderItem() {
+  const allReaderItems = Array.from(
+    document.querySelectorAll("#items > .read-item")
+  );
+
+  if (allReaderItems.length > 0) {
+    allReaderItems.at(0).classList.add("selected");
   }
 }
