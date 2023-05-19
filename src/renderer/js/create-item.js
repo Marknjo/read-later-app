@@ -14,8 +14,6 @@ export const loadItemsHandler = () => {
   // search items by title
   loadLocalItems(loadFromStore, itemsEl, itemTemplateEl);
 
-  console.log();
-
   // loadLocalItems(filteredItems, itemsEl, itemTemplateEl);
   searchReaders(itemsEl, searchInputEl);
 };

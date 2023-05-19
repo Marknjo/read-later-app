@@ -163,7 +163,7 @@ main::-webkit-scrollbar-thumb {
   align-content: center;
   background-color: #fafafa;
   padding: 1rem;
-  border-left: 1rem solid lightgray;
+  border-left: 1rem solid #edf2f8;
   cursor: pointer;
 }
 
@@ -171,13 +171,16 @@ main::-webkit-scrollbar-thumb {
   border-bottom: 2px solid lightgray;
 }
 
+.read-item > * {
+  user-select: none;
+}
+
 .read-item:hover {
-  background-color: #eee;
+  background-color: #edf2f8;
 }
 
 .read-item.selected {
-  background-color: #ebebeb;
-  border-left-color: dodgerblue;
+  animation: fadeInBorder 0.3s ease-in forwards;
 }
 
 .read-item img {
@@ -204,5 +207,19 @@ main::-webkit-scrollbar-thumb {
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeInBorder {
+  from {
+    background-color: #e2f1ff;
+    border-left-color: #edf2f8;
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    background-color: #f0f5fa;
+    border-left-color: dodgerblue;
   }
 }
