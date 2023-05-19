@@ -28,7 +28,11 @@ export const searchReaders = (itemsEl, searchInputEl) => {
       let searchTerm = searchInputEl.value.trim();
       let title = readerEl.querySelector("h2").innerText;
 
-      if (searchTerm !== "" && searchTerm.length > 2) {
+      if (
+        searchTerm !== "" &&
+        event.key !== "Backspace" &&
+        searchTerm.length > 2
+      ) {
         // @TODO: implement debouncing
         searchItem(readerEl, title, searchTerm);
       }
