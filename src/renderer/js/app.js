@@ -49,3 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Activate search
   searchInputEl && menuActivateSearchItem(searchInputEl);
 });
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  window.electronAPI.contextMenuHandler();
+});

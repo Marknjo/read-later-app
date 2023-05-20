@@ -1,5 +1,5 @@
 // Modules
-const { Menu, shell, MenuItem } = require("electron");
+const { Menu, shell, MenuItem, BrowserWindow, ipcMain } = require("electron");
 const { isDev } = require("./utils");
 
 /**
@@ -8,6 +8,33 @@ const { isDev } = require("./utils");
  */
 module.exports = (appWin) => {
   // menu template
+  /**
+   * @type {[MenuItem]} shareableSubMenu
+   */
+  const shareableSubMenu = [
+    {
+      label: "Read Item",
+      accelerator: "CmdOrCtrl+Enter",
+      click: () => {
+        appWin.send("menu:read-reader-item");
+      },
+    },
+    {
+      label: "Delete Item",
+      accelerator: "CmdOrCtrl+Backspace",
+      click: () => {
+        appWin.send("menu:delete-item");
+      },
+    },
+    {
+      label: "Open in Browser",
+      accelerator: "CmdOrCtrl+shift+Enter",
+      click: () => {
+        appWin.send("menu:open-in-browser");
+      },
+    },
+  ];
+
   /**
    * @type {[MenuItem]} template
    */
@@ -22,27 +49,7 @@ module.exports = (appWin) => {
             appWin.send("menu:show-add-item");
           },
         },
-        {
-          label: "Read Item",
-          accelerator: "CmdOrCtrl+Enter",
-          click: () => {
-            appWin.send("menu:read-reader-item");
-          },
-        },
-        {
-          label: "Delete Item",
-          accelerator: "CmdOrCtrl+Backspace",
-          click: () => {
-            appWin.send("menu:delete-item");
-          },
-        },
-        {
-          label: "Open in Browser",
-          accelerator: "CmdOrCtrl+shift+Enter",
-          click: () => {
-            appWin.send("menu:open-in-browser");
-          },
-        },
+        ...shareableSubMenu,
         {
           label: "Search Items",
           accelerator: "CmdOrCtrl+F",
@@ -55,14 +62,31 @@ module.exports = (appWin) => {
     {
       role: "editMenu",
     },
-    {
-      role: "windowMenu",
-    },
+
     isDev && {
-      label: "Tools",
+      label: "View",
       submenu: [
         {
           role: "toggleDevTools",
+        },
+        { role: "reload" },
+        {
+          role: "close",
+        },
+        {
+          type: "separator",
+        },
+        {
+          role: "minimize",
+        },
+        {
+          role: "togglefullscreen",
+        },
+        {
+          role: "zoomIn",
+        },
+        {
+          role: "zoomOut",
         },
       ],
     },
@@ -89,4 +113,16 @@ module.exports = (appWin) => {
 
   // Set as main app menu
   Menu.setApplicationMenu(menu);
+
+  // Context menu
+  ipcMain.on("show-context-menu", (event) => {
+    const template = [
+      ...shareableSubMenu,
+      { type: "separator" },
+      { role: "reload" },
+      { role: "close" },
+    ];
+    const menu = Menu.buildFromTemplate(template);
+    menu.popup(BrowserWindow.fromWebContents(event.sender));
+  });
 };

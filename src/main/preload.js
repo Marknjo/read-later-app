@@ -14,4 +14,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
       shell.openExternal(url);
     });
   },
+  contextMenuHandler: () => ipcRenderer.send("show-context-menu"),
 });

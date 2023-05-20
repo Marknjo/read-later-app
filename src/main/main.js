@@ -1,5 +1,5 @@
 const { join } = require("path");
-const { BrowserWindow, app, ipcMain } = require("electron");
+const { BrowserWindow, app, ipcMain, Menu } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 const readPageMeta = require("./get-page-meta");
 const appMenu = require("./menu");
