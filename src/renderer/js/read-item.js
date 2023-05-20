@@ -23,6 +23,7 @@ export function readitOnEnter() {
     if (event.key === "Enter") {
       readit();
     }
+    event.stopPropagation();
   });
 }
 

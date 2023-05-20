@@ -119,10 +119,11 @@ export const createItem = (itemEl, addItemEl, modalEl) => {
     addItem(itemEl, modalEl, addItemEl);
   });
 
-  itemEl.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
+  itemEl.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
       addItem(itemEl, modalEl, addItemEl);
     }
+    event.stopPropagation();
   });
   itemEl.addEventListener("click", (event) => event.stopPropagation());
 };
