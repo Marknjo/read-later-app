@@ -1,4 +1,5 @@
 import { loadFromStore } from "./local-store.js";
+import { getReaderContent } from "./readit-js.js";
 
 export function readit() {
   if (!loadFromStore.length) return;
@@ -7,21 +8,7 @@ export function readit() {
 
   const contentUrl = selectedItem.dataset.readitUrl;
 
-  const readerWin = window.open(
-    contentUrl,
-    "",
-    `
-    maxWidth=2000,
-    maxHeight=2000,
-    width=1200,
-    height=800,
-    backgroundColor=#DEDEDE,
-    nodeIntegration=0,
-    contextIsolation=1
-  `
-  );
-
-  getReaderJS(readerWin);
+  const readerWin = window.open(contentUrl, "modal");
 
   /* @TODO: Implement a better mode of handling js */
 }
@@ -35,12 +22,4 @@ export function readitOnEnter() {
       readit();
     }
   });
-}
-
-async function getReaderJS(readerWin) {
-  const readItJs = await window.electronAPI.loadReaderJs();
-
-  console.log(readerWin);
-
-  readerWin.eval(readItJs);
 }

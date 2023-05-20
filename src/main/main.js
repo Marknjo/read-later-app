@@ -26,8 +26,27 @@ function setItemHandler(_event, url) {
   });
 }
 
-function setReadItJSHandler() {
-  return readFile(join(__dirname, "readit-js.js"), "utf-8");
+function prepReader(parentWin) {
+  parentWin.webContents.setWindowOpenHandler(({ url }) => {
+    // console.log({ url: url === "about:blank", url });
+    return {
+      action: "allow",
+      overrideBrowserWindowOptions: {
+        maxWidth: 2000,
+        maxHeight: 2000,
+        width: 1200,
+        height: 800,
+        center: true,
+        frame: true,
+        fullscreenable: false,
+        closable: true,
+        backgroundColor: "#DEDEDE",
+        webPreferences: {
+          preload: join(__dirname, "preload.js"),
+        },
+      },
+    };
+  });
 }
 
 const createWindow = () => {
@@ -57,6 +76,8 @@ const createWindow = () => {
   winState.manage(win);
 
   win.webContents.openDevTools();
+  ///
+  prepReader(win);
 
   /// on window close clear window reference
   win.on("close", () => {
@@ -66,7 +87,6 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   ipcMain.handle("item:set-url", setItemHandler);
-  ipcMain.handle("readit:js", setReadItJSHandler);
 
   createWindow();
 
