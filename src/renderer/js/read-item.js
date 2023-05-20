@@ -13,12 +13,6 @@ export function readit() {
   const readerWin = loadReader(contentUrl, itemsEl);
 
   /* @TODO: Implement a better mode of handling js */
-
-  // readerWin.eval(`
-  //   console.log("Content loaded")
-  // `);readerWin.eval(`
-  //   console.log("Content loaded")
-  // `);
 }
 
 /**
@@ -41,7 +35,7 @@ export function readSelectedItemOnMenuClick() {
 /**
  * set currently loaded url
  * @param {string} contentUrl
- * @returns Window
+ * @returns {Window}
  */
 function loadReader(contentUrl, itemsEl) {
   /// delete item

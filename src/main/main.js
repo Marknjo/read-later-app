@@ -3,6 +3,7 @@ const { BrowserWindow, app, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 const readPageMeta = require("./get-page-meta");
 const appMenu = require("./menu");
+const { isDev } = require("./utils");
 
 /// RESUME on PAGE: 1305
 
@@ -42,6 +43,7 @@ function prepReader(parentWin) {
         backgroundColor: "#DEDEDE",
         webPreferences: {
           preload: join(__dirname, "preload.js"),
+          sandbox: false,
         },
       },
     };
@@ -64,7 +66,8 @@ const createWindow = () => {
     modal: true,
     // maxWidth: 650,
     webPreferences: {
-      // nodeIntegration: true,
+      nodeIntegration: true,
+      // contextIsolation: false,
       sandbox: false,
       devTools: true,
       preload: join(__dirname, "preload.js"),
@@ -76,7 +79,7 @@ const createWindow = () => {
 
   winState.manage(win);
 
-  win.webContents.openDevTools();
+  isDev && win.webContents.openDevTools();
 
   // create app menu
   appMenu(win.webContents);

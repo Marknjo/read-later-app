@@ -1,5 +1,6 @@
 // Modules
 const { Menu, shell, MenuItem } = require("electron");
+const { isDev } = require("./utils");
 
 /**
  *
@@ -56,6 +57,14 @@ module.exports = (appWin) => {
     },
     {
       role: "windowMenu",
+    },
+    isDev && {
+      label: "Tools",
+      submenu: [
+        {
+          role: "toggleDevTools",
+        },
+      ],
     },
     {
       role: "help",
