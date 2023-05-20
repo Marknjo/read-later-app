@@ -8,6 +8,10 @@ export const modalToggler = (modalEl) => {
     modalEl.classList.remove("show-modal");
   } else {
     modalEl.classList.add("show-modal");
+
+    /** @type {HTMLInputElement} */
+    const inputEl = modalEl.firstElementChild;
+    inputEl.focus();
   }
 };
 
@@ -19,7 +23,6 @@ export const modalToggler = (modalEl) => {
  * @param {HTMLInputElement} itemUrl
  */
 export function toggleModal(modalEl, showModalEl, closeModalBtnEl, itemUrl) {
-  itemUrl.focus();
   showModalEl.addEventListener("click", () => {
     modalToggler(modalEl);
   });
