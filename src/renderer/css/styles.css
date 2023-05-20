@@ -200,6 +200,12 @@ main::-webkit-scrollbar-thumb {
   display: none;
 }
 
+#open-external {
+  display: none;
+  position: absolute;
+  left: -99999999px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

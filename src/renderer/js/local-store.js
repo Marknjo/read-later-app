@@ -2,37 +2,36 @@
 
 const storedItems = localStorage.getItem("readit-items");
 
-const parsedItems = (getEntries = false, getTitles = false) => {
+const parsedItems = (getEntries = false, getUrl = false) => {
   if (!storedItems) return [];
 
   const itemEntries = JSON.parse(storedItems);
 
   if (getEntries) return itemEntries;
 
-  if (getTitles) return [...new Map(itemEntries).keys()];
+  if (getUrl) return [...new Map(itemEntries).keys()];
 
   return [...new Map(itemEntries).values()].reverse();
 };
 
 export const loadFromStore = parsedItems();
-export const loadTitlesFromStore = parsedItems(false, true);
+export const loadUrlsFromStore = parsedItems(false, true);
 
 // persist to storage
 
 export const saveToStore = (item, update = false) => {
-  const data = [
-    ...new Map([[item.title, item], ...parsedItems(true)]).entries(),
-  ];
+  const oldData = parsedItems(true);
+  const newData = [item.url, item];
+  const mergedData = [newData, ...oldData];
+  const data = [...new Map(mergedData).entries()];
 
   localStorage.setItem("readit-items", JSON.stringify(update ? item : data));
 };
 
-export const deleteFromStore = (title) => {
+export const deleteFromStore = (url) => {
   if (loadFromStore.length === 0) return;
 
-  const filteredItems = parsedItems(true).filter(
-    (item) => item.at(0) !== title
-  );
+  const filteredItems = parsedItems(true).filter((item) => item.at(0) !== url);
 
   saveToStore(filteredItems, true);
 };

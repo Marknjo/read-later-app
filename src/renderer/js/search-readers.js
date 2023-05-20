@@ -52,3 +52,13 @@ export const searchReaders = (itemsEl, searchInputEl) => {
     });
   });
 };
+
+/**
+ *
+ * @param {HTMLInputElement} searchInputEl
+ */
+export const menuActivateSearchItem = (searchInputEl) => {
+  window.electronAPI.searchItems(() => {
+    searchInputEl.focus();
+  });
+};

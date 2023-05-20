@@ -38,3 +38,13 @@ export function toggleModal(modalEl, showModalEl, closeModalBtnEl, itemUrl) {
     modalToggler(modalEl);
   });
 }
+
+/**
+ *
+ * @param {HTMLDivElement} modalEl
+ */
+export function toggleModalFromMenu(modalEl) {
+  window.electronAPI.showAddItemModal(() => {
+    modalToggler(modalEl);
+  });
+}

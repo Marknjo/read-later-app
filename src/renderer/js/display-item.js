@@ -1,4 +1,4 @@
-import { loadFromStore, loadTitlesFromStore } from "./local-store.js";
+import { loadFromStore, loadUrlsFromStore } from "./local-store.js";
 import { readit } from "./read-item.js";
 
 /**
@@ -34,7 +34,7 @@ export default function displayItem(
 
   // show to the ui
   if (isNewItem) {
-    loadTitlesFromStore.includes(response.title) ||
+    loadUrlsFromStore.includes(response.url) ||
       itemsWrapperEl.insertAdjacentElement("afterbegin", displayElement);
   } else {
     itemsWrapperEl.insertAdjacentElement("afterbegin", displayElement);
@@ -137,6 +137,32 @@ function changeSelectedByArrow(direction, itemEl) {
     }
     return;
   }
+}
+
+/**
+ *
+ * @param {HTMLDivElement} itemsEl
+ * @param {string} deleteItemUrl
+ */
+export function deleteItemFromUI(itemsEl, deleteItemUrl) {
+  const items = itemsEl.querySelectorAll(".read-item");
+
+  /** @type {[HTMLElement]} itemsArr */
+  const itemsArr = Array.from(items);
+
+  let timer;
+
+  itemsArr.forEach((item) => {
+    if (item.dataset.readitUrl === deleteItemUrl) {
+      timer && clearTimeout(timer);
+
+      item.classList.add("hide");
+
+      timer = setTimeout(() => {
+        itemsEl.removeChild(item);
+      }, 100);
+    }
+  });
 }
 
 function highlightReaderItem() {

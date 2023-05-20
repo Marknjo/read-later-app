@@ -1,8 +1,8 @@
 const { join } = require("path");
-const { readFile } = require("fs/promises");
 const { BrowserWindow, app, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 const readPageMeta = require("./get-page-meta");
+const appMenu = require("./menu");
 
 /// RESUME on PAGE: 1305
 
@@ -28,7 +28,6 @@ function setItemHandler(_event, url) {
 
 function prepReader(parentWin) {
   parentWin.webContents.setWindowOpenHandler(({ url }) => {
-    // console.log({ url: url === "about:blank", url });
     return {
       action: "allow",
       overrideBrowserWindowOptions: {
@@ -62,9 +61,11 @@ const createWindow = () => {
     height: winState.height,
     minHeight: 300,
     minWidth: 350,
+    modal: true,
     // maxWidth: 650,
     webPreferences: {
-      nodeIntegration: false,
+      // nodeIntegration: true,
+      sandbox: false,
       devTools: true,
       preload: join(__dirname, "preload.js"),
     },
@@ -76,6 +77,10 @@ const createWindow = () => {
   winState.manage(win);
 
   win.webContents.openDevTools();
+
+  // create app menu
+  appMenu(win.webContents);
+
   ///
   prepReader(win);
 

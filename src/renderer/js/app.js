@@ -4,8 +4,13 @@ import {
   selectFirstReaderItemOnPageLoad,
   selectedReaderItemByArrowsHandler,
 } from "./display-item.js";
-import { toggleModal } from "./modal-handler.js";
-import { readitOnEnter } from "./read-item.js";
+import { toggleModal, toggleModalFromMenu } from "./modal-handler.js";
+import {
+  readItFromBrowser,
+  readSelectedItemOnMenuClick,
+  readitOnEnter,
+} from "./read-item.js";
+import { menuActivateSearchItem } from "./search-readers.js";
 
 // modal elements
 let showModalEl = document.getElementById("show-modal"),
@@ -16,18 +21,31 @@ let showModalEl = document.getElementById("show-modal"),
 let itemUrlEl = document.getElementById("url"),
   addItemEl = document.getElementById("add-item");
 
+/// load search input element
+let searchInputEl = document.getElementById("search");
+
 /// handle showing of modal
 if (itemUrlEl && showModalEl && closeModalBtnEl && modalEl) {
+  toggleModalFromMenu(modalEl);
   toggleModal(modalEl, showModalEl, closeModalBtnEl, itemUrlEl);
 }
 
 /// Handle add item to the UI
-if (itemUrlEl && addItemEl && modalEl) {
+if (itemUrlEl && addItemEl && modalEl && searchInputEl) {
   createItem(itemUrlEl, addItemEl, modalEl);
-  loadItemsHandler();
+  loadItemsHandler(searchInputEl);
 }
 
 // handle update of ui of the selected element by moving arrows
 selectFirstReaderItemOnPageLoad();
-selectedReaderItemByArrowsHandler();
-readitOnEnter();
+
+document.addEventListener("DOMContentLoaded", () => {
+  selectedReaderItemByArrowsHandler();
+  /// Reader
+  readitOnEnter();
+  readSelectedItemOnMenuClick();
+  readItFromBrowser();
+
+  // Activate search
+  searchInputEl && menuActivateSearchItem(searchInputEl);
+});

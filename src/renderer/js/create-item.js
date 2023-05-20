@@ -6,11 +6,14 @@ import { searchReaders } from "./search-readers.js";
 
 // Items UI
 let itemsEl = document.getElementById("items"),
-  itemTemplateEl = document.querySelector("#templates"),
-  searchInputEl = document.getElementById("search");
+  itemTemplateEl = document.querySelector("#templates");
 
 // Load from local storage
-export const loadItemsHandler = () => {
+/**
+ *
+ * @param {HTMLInputElement} searchInputEl
+ */
+export const loadItemsHandler = (searchInputEl) => {
   // search items by title
   loadLocalItems(loadFromStore, itemsEl, itemTemplateEl);
 
