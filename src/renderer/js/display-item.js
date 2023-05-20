@@ -30,6 +30,14 @@ export default function displayItem(
   h2El.innerText = response.title;
   displayElement.dataset.readitUrl = response.url;
 
+  isNewItem &&
+    (() => {
+      deselectCurrentSelected(itemsWrapperEl);
+      toggleSelectedItem(displayElement);
+    })();
+
+  // handle selecting and deselecting of items in the ui
+  // - visual response on click of reader item
   selectItem(displayElement);
 
   // show to the ui
@@ -54,6 +62,15 @@ export function loadLocalItems(localItems, itemsWrapperEl, itemTemplate) {
 }
 
 /**
+ * Remove any item that is already selected on selecting a new item
+ * @param {HTMLElement} itemsEl
+ */
+function deselectCurrentSelected(itemsEl) {
+  const selectedItem = itemsEl.querySelector(".selected");
+  selectedItem && toggleSelectedItem(selectedItem);
+}
+
+/**
  * Helper to toggle selected reader item
  * @param {HTMLElement} itemEl
  */
@@ -67,10 +84,8 @@ const toggleSelectedItem = (itemEl) => {
  */
 export function selectItem(itemEl) {
   itemEl.addEventListener("click", (event) => {
-    const selectedItem = itemEl.parentElement.querySelector(".selected");
-
     // Remove any item that is already selected on selecting a new item
-    !!selectedItem && toggleSelectedItem(selectedItem);
+    deselectCurrentSelected(itemEl.parentElement);
 
     // add selected class to read-item element,
     // 1. if either image or h2 is selected
