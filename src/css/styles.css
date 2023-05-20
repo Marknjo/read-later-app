@@ -1,0 +1,231 @@
+*::after,
+*::before,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  font: caption;
+  display: flex;
+  flex-flow: column;
+}
+
+button {
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2rem;
+  outline: none;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+
+input {
+  display: block;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid silver;
+  padding: 0 1rem;
+}
+
+input::placeholder {
+  color: lightgray;
+}
+
+header {
+  background-color: lightgray;
+  display: flex;
+  padding: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid silver;
+}
+
+main {
+  flex: 1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+main::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+main::-webkit-scrollbar-track {
+  border-radius: 0.2rem;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+
+main::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background-color: dodgerblue;
+}
+
+#show-modal {
+  padding: 0 1.2rem 0.5rem;
+  margin-right: 1rem;
+  font-size: 3rem;
+}
+
+#search {
+  flex-grow: 1;
+}
+
+#no-items {
+  font-weight: bold;
+  color: silver;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  z-index: -1;
+}
+
+/**
+* --------------------------------
+*              Modal
+*  --------------------------------
+*/
+
+.modal {
+  position: absolute;
+  top: -1000px;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  background-color: rgba(0, 0, 0, 0.75);
+  visibility: hidden;
+  padding: 0 2rem;
+  transition: all 0.15s ease-in;
+}
+
+#url {
+  flex-grow: 1;
+  width: 100%;
+  margin: 0 2.5rem;
+  padding: 1rem;
+}
+
+.modal button {
+  padding: 1rem;
+}
+
+.btn-close-modal {
+  background-color: white;
+  color: black;
+  margin-left: 1.5rem;
+}
+#add-item {
+  margin-left: 2.5rem;
+}
+
+.show-modal {
+  visibility: visible;
+  top: 0;
+  opacity: 1;
+}
+
+/**
+* --------------------------------
+*             Read Item
+*  --------------------------------
+*/
+#items {
+  flex-grow: 1;
+  border-bottom: 2px solid lightgray;
+}
+
+.read-item {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background-color: #fafafa;
+  padding: 1rem;
+  border-left: 1rem solid #edf2f8;
+  cursor: pointer;
+}
+
+.read-item:not(:last-of-type) {
+  border-bottom: 2px solid lightgray;
+}
+
+.read-item > * {
+  user-select: none;
+}
+
+.read-item:hover {
+  background-color: #edf2f8;
+}
+
+.read-item.selected {
+  animation: fadeInBorder 0.3s ease-in forwards;
+}
+
+.read-item img {
+  width: 20%;
+  margin-right: 2.5rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.show {
+  display: flex;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.hide {
+  display: none;
+}
+
+#open-external {
+  display: none;
+  position: absolute;
+  left: -99999999px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBorder {
+  from {
+    background-color: #e2f1ff;
+    border-left-color: #edf2f8;
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    background-color: #f0f5fa;
+    border-left-color: dodgerblue;
+  }
+}
