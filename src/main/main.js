@@ -64,10 +64,10 @@ const createWindow = () => {
     minHeight: 300,
     minWidth: 350,
     modal: true,
-    // maxWidth: 650,
+    maxWidth: 550,
+    maxHeight: 1000,
     webPreferences: {
       nodeIntegration: true,
-      // contextIsolation: false,
       sandbox: false,
       devTools: true,
       preload: join(__dirname, "preload.js"),
